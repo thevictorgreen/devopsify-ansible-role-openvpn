@@ -1,5 +1,5 @@
 ---
-# tasks file for aptly
+# tasks file for OpenVPN
 - name: Update Repositories
   become: yes
   apt:

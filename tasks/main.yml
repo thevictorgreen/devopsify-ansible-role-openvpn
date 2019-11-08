@@ -4,3 +4,27 @@
   become: yes
   apt:
     update_cache: yes
+
+- name: Install Prerequisites
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - ca-certificates
+      - wget
+      - net-tools
+
+- name: Download and install gpg key for the openvpn repository
+  become: yes
+  shell: wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
+
+- name: Install the openvpn repository
+  become: yes
+  shell: echo "deb http://as-repository.openvpn.net/as/debian bionic main">/etc/apt/sources.list.d/openvpn-as-repo.list
+
+- name: Update the repositories and install the openvpn-as package
+  become: yes
+  apt:
+    name: openvpn-as
+    update_cache: yes

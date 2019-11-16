@@ -1,0 +1,24 @@
+acl goodclients {
+           # Place All VPN Subnets Here
+           localhost;
+           localnets;
+};
+
+options {
+            directory "/var/cache/bind";
+
+            recursion yes;
+
+            allow-query { goodclients; };
+
+            dnssec-enable yes;
+            dnssec-validation yes;
+
+            auth-nxdomain no;    # conform to RFC1035
+            listen-on-v6 { any; };
+
+            forwarders {
+              # Place Upstream DNS Servers here
+            };
+            forward only;
+};

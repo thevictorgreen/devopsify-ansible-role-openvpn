@@ -2,6 +2,7 @@ acl goodclients {
            # Place All VPN Subnets Here
            localhost;
            localnets;
+           172.27.224.0/20;
 };
 
 options {
@@ -19,6 +20,7 @@ options {
 
             forwarders {
               # Place Upstream DNS Servers here
+              10.10.0.2;
             };
             forward only;
 };
